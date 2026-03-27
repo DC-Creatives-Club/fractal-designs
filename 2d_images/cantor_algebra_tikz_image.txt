@@ -1,0 +1,158 @@
+\begin{figure}
+\centering
+
+\begin{tikzpicture}[every node/.style={font=\small}]
+
+\def\barheight{0.15}
+\def\levelgap{0.5}
+\def\treebase{1.5}
+\def\treedepth{1.2}
+
+% =====================================================
+% Cantor set (3 levels, corrected arithmetic)
+% =====================================================
+
+% Level 0
+\fill[black] (0,0) rectangle (8,\barheight);
+
+% Level 1
+\fill[black] (0,-\levelgap) rectangle (8/3,\barheight-\levelgap);
+\fill[black] (16/3,-\levelgap) rectangle (8,\barheight-\levelgap);
+
+% Level 2
+\fill[black] (0,-2*\levelgap) rectangle (8/9,\barheight-2*\levelgap);
+\fill[black] (16/9,-2*\levelgap) rectangle (8/3,\barheight-2*\levelgap);
+\fill[black] (16/3,-2*\levelgap) rectangle (56/9,\barheight-2*\levelgap);
+\fill[black] (64/9,-2*\levelgap) rectangle (8,\barheight-2*\levelgap);
+
+% Level 3 (FIXED)
+\fill[black] (0,-3*\levelgap) rectangle (8/27,\barheight-3*\levelgap);
+\fill[black] (16/27,-3*\levelgap) rectangle (24/27,\barheight-3*\levelgap);
+\fill[black] (48/27,-3*\levelgap) rectangle (56/27,\barheight-3*\levelgap);
+\fill[black] (64/27,-3*\levelgap) rectangle (72/27,\barheight-3*\levelgap);
+\fill[black] (144/27,-3*\levelgap) rectangle (152/27,\barheight-3*\levelgap);
+\fill[black] (160/27,-3*\levelgap) rectangle (168/27,\barheight-3*\levelgap);
+\fill[black] (192/27,-3*\levelgap) rectangle (200/27,\barheight-3*\levelgap);
+\fill[black] (208/27,-3*\levelgap) rectangle (216/27,\barheight-3*\levelgap);
+
+% =====================================================
+% Tree nodes (with labels)
+% =====================================================
+
+% Root
+\node[circle,fill=black,inner sep=2pt,label=above:{}] (root)
+  at (4,\treebase+3*\treedepth) {};
+\node at (4,\treebase+3*\treedepth+0.3) {$\emptyset$};
+
+% Level 1
+\node[circle,fill=black,inner sep=2pt] (l0)
+  at (4/3,\treebase+2*\treedepth) {};
+\node[left=4pt of l0] {$0$};
+
+\node[circle,fill=black,inner sep=2pt] (r0)
+  at (20/3,\treebase+2*\treedepth) {};
+\node[right=4pt of r0] {$1$};
+
+% Level 2
+\node[circle,fill=black,inner sep=2pt] (l00)
+  at (4/9,\treebase+\treedepth) {};
+\node[left=4pt of l00] {$00$};
+
+\node[circle,fill=black,inner sep=2pt] (l01)
+  at (20/9,\treebase+\treedepth) {};
+\node[right=4pt of l01] {$01$};
+
+\node[circle,fill=black,inner sep=2pt] (r10)
+  at (52/9,\treebase+\treedepth) {};
+\node[left=4pt of r10] {$10$};
+
+\node[circle,fill=black,inner sep=2pt] (r11)
+  at (68/9,\treebase+\treedepth) {};
+\node[right=4pt of r11] {$11$};
+
+% Level 3
+\node[circle,fill=black,inner sep=2pt] (l000)
+  at (4/27,\treebase) {};
+\node[below=4pt of l000] {$000$};
+
+\node[circle,fill=black,inner sep=2pt] (l001)
+  at (20/27,\treebase) {};
+\node[below=4pt of l001] {$001$};
+
+\node[circle,fill=black,inner sep=2pt] (l010)
+  at (52/27,\treebase) {};
+\node[below=4pt of l010] {$010$};
+
+\node[circle,fill=black,inner sep=2pt] (l011)
+  at (68/27,\treebase) {};
+\node[below=4pt of l011] {$011$};
+
+\node[circle,fill=black,inner sep=2pt] (r100)
+  at (148/27,\treebase) {};
+\node[below=4pt of r100] {$100$};
+
+\node[circle,fill=black,inner sep=2pt] (r101)
+  at (164/27,\treebase) {};
+\node[below=4pt of r101] {$101$};
+
+\node[circle,fill=black,inner sep=2pt] (r110)
+  at (196/27,\treebase) {};
+\node[below=4pt of r110] {$110$};
+
+\node[circle,fill=black,inner sep=2pt] (r111)
+  at (212/27,\treebase) {};
+\node[below=4pt of r111] {$111$};
+
+% =====================================================
+% Shading C_{00}
+% =====================================================
+
+% Triangle
+\fill[gray,opacity=0.25]
+  (l00.center)
+  -- (l000.center)
+  -- (l001.center)
+  -- cycle;
+
+% Vertical projection
+\fill[gray,opacity=0.25]
+  (l000.center)
+  -- (l001.center)
+  -- (8/9,0*\levelgap)
+  -- (0,0*\levelgap)
+  -- cycle;
+
+% =====================================================
+% Edges
+% =====================================================
+
+\draw (root) -- (l0);
+\draw (root) -- (r0);
+
+\draw (l0) -- (l00);
+\draw (l0) -- (l01);
+\draw (r0) -- (r10);
+\draw (r0) -- (r11);
+
+\draw (l00) -- (l000);
+\draw (l00) -- (l001);
+\draw (l01) -- (l010);
+\draw (l01) -- (l011);
+\draw (r10) -- (r100);
+\draw (r10) -- (r101);
+\draw (r11) -- (r110);
+\draw (r11) -- (r111);
+
+% Highlighted path
+\draw[very thick] (root) -- (l0);
+\draw[very thick] (l0) -- (l00);
+
+% Dashed connectors
+\foreach \x in {4/27,20/27,52/27,68/27,148/27,164/27,196/27,212/27}
+  \draw[dashed,gray] (\x,\treebase) -- (\x,-3*\levelgap);
+
+\end{tikzpicture}
+
+\caption{The cylinder set $C_{00}$ consists of every infinite string with prefix $00$ shown as the shaded region on the left.}
+
+\end{figure}
