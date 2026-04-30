@@ -1,4 +1,4 @@
-# fractal-designs
+# Cantor Algebra 3D Model
 Designs and sketches for bringing the Cantor algebra to live by 3D printing a model and then creating a metal sculpture.
 
 The Cantor set is the (uncountable) Stone space dual to the (countable) [Cantor algebra](https://en.wikipedia.org/wiki/Cantor_algebra).
